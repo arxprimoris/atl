@@ -1,4 +1,4 @@
 atl
 ===
 
-Arxprimoris Template Library
+Arx Template Library
