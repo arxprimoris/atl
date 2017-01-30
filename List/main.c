@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "list.h"
 
 typedef struct _Employee {
@@ -12,7 +15,7 @@ int employeeDestructor(void* employee) {
 	Employee* theEmployee = (Employee*) employee;
 
 	printf("Employee %s(%d) destructor called...\n", theEmployee->name, theEmployee->id);
-	
+
 	free(theEmployee);
 
 	return(0);
@@ -52,7 +55,7 @@ int addEmployee() {
 int deleteEmployee() {
 	Employee dummyEmployee;
 	char input[4];
-	
+
 	printf("Employee ID:  ");
 	fgets(input, sizeof(input) - 1, stdin);
 	sscanf(input, "%d", &dummyEmployee.id);
@@ -60,7 +63,7 @@ int deleteEmployee() {
 	if(List_remove(&employeeList, &dummyEmployee, employeeCompare) == LIST_FUNC_SUCCESS) {
 		return(0);
 	}
-	
+
 	printf("\nEmployee ID %d not found!\n\n", dummyEmployee.id);
 	return(1);
 }
@@ -79,7 +82,7 @@ int listEmployees() {
 int main (int argc, char *argv[]) {
 	char input[10];
 	char choice;
-	
+
 	List_create(&employeeList, &employeeDestructor);
 
 	while(1) {
@@ -88,10 +91,10 @@ int main (int argc, char *argv[]) {
 		printf("[D]elete employee\n");
 		printf("[L]ist employee(s)\n");
 		printf("[Q]uit\n\n:");
-		
+
 		fgets(input, sizeof(input) - 1, stdin);
 		sscanf(input, "%c", &choice);
-		
+
 		switch(input[0]) {
 			case 'a':
 				addEmployee();

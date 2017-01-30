@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "list.h"
 
 int List_create(LinkedList* list, int (*elementDestructor)(void*)) {
@@ -51,7 +52,7 @@ int List_behead(LinkedList* list) {
 	list->_elementDestructor(list->_firstNode->data);
 	_removeNode(list->_firstNode);
 	list->_firstNode = newFirstNode; 	// You guessed it; will be null if firstNode was last node.
-	
+
 	return(LIST_FUNC_SUCCESS);
 }
 
@@ -85,7 +86,7 @@ int List_chop(LinkedList* list) {
 	list->_elementDestructor(list->_lastNode->data);
 	_removeNode(list->_lastNode);
 	list->_lastNode = newLastNode;		// You guessed it; will be null if firstNode was last node.
-	
+
 	return(LIST_FUNC_SUCCESS);
 }
 
@@ -99,7 +100,7 @@ int List_insert(LinkedList* list, void* beforeItem, void* data, int (*elementCom
 	int returnVal = List_iteratorTo(list, data, elementCompare);
 
 	if(returnVal == LIST_FUNC_SUCCESS) {
-		List_iteratorInsert(list, data);		
+		List_iteratorInsert(list, data);
 	}
 	list->_curNode = curCopy;
 	return(returnVal);
@@ -113,7 +114,7 @@ int List_remove(LinkedList* list, void* data, int (*elementCompare)(void*, void*
 	list->_curNode = list->_firstNode;
 
 	int returnVal = List_iteratorTo(list, data, elementCompare);
-	
+
 	if(returnVal == LIST_FUNC_SUCCESS) {
 		List_iteratorRemove(list);
 	}
@@ -130,7 +131,7 @@ void* List_iteratorBegin(LinkedList* list) {
 		return(NULL);
 	}
 	list->_curNode = list->_firstNode;
-	
+
 	return(list->_curNode->data);
 }
 
@@ -139,7 +140,7 @@ void* List_iteratorEnd(LinkedList* list) {
 		return(NULL);
 	}
 	list->_curNode = list->_lastNode;
-	
+
 	return(list->_curNode->data);
 }
 
@@ -151,11 +152,11 @@ void* List_iteratorNext(LinkedList* list) {
 		return(NULL);
 	}
 	list->_curNode = list->_curNode->next;
-		
+
 	return(list->_curNode->data);
 }
 
-void* List_iteratorPrev(LinkedList* list) {	
+void* List_iteratorPrev(LinkedList* list) {
 	if(list == NULL || list->_curNode == NULL) {
 		return(NULL);
 	}
@@ -163,7 +164,7 @@ void* List_iteratorPrev(LinkedList* list) {
 		return(NULL);
 	}
 	list->_curNode = list->_curNode->prev;
-			
+
 	return(list->_curNode->data);
 }
 
@@ -171,7 +172,7 @@ int List_iteratorTo(LinkedList* list, void* data, int (*elementCompare)(void*, v
 	if(list ==  NULL || data == NULL) {
 		return(LIST_ERR_NULL_ARG);
 	}
-	while(list->_curNode != NULL) {	
+	while(list->_curNode != NULL) {
 		if(elementCompare != NULL) {
 			if(elementCompare(data, list->_curNode->data) == 0) { // Zero means a match
 				return(LIST_FUNC_SUCCESS);
@@ -205,7 +206,7 @@ int List_iteratorRemove(LinkedList* list) {
 	if(list->_curNode == NULL) {
 		return(LIST_EMPTY);
 	}
-	if(list->_curNode == list->_firstNode) { 
+	if(list->_curNode == list->_firstNode) {
 		return(List_behead(list) );
 	}
 	else if(list->_curNode == list->_lastNode) {
@@ -256,11 +257,11 @@ int _removeNode(struct _ListNode* node) {
 		node->prev->next = node->next;
 	}
 	free(node);
-	
+
 	return(0);
 }
 
-void* _insertNode(struct _ListNode* prevNode, struct _ListNode* nextNode, void* data) {	
+void* _insertNode(struct _ListNode* prevNode, struct _ListNode* nextNode, void* data) {
 	struct _ListNode* newNode = (struct _ListNode*) malloc(sizeof(struct _ListNode));
 
 	if(prevNode != NULL) {

@@ -1,7 +1,5 @@
 #ifndef _LIST_H_
 #define _LIST_H_
-#include <stdlib.h>
-#include <stdio.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //  Vector function return values
@@ -14,8 +12,8 @@
 #define LIST_ERR_ALLOCATION	 	-3	// List capacity resize has failed
 
 /////////////////////////////////////////////////////////////////////////////////////////
-//  _ListNode is the internal atom of data used within the linked 
-//  list. This data structure will be managed within the List_... 
+//  _ListNode is the internal atom of data used within the linked
+//  list. This data structure will be managed within the List_...
 //  functions and do not require client interaction. Members should
 //  be self evident.
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +32,7 @@ struct _ListNode
 //  functions and do not require client interaction.
 //  Member - _firstNode: Will always point to head node.
 //  Member - _lastNode:  Will always point to tail node.
-//  Member - _curNode:   Internal iterator node. Its state will vary 
+//  Member - _curNode:   Internal iterator node. Its state will vary
 //                       depending on various List_... function calls.
 /////////////////////////////////////////////////////////////////////////////////////////
 typedef struct _LinkedList
@@ -60,17 +58,17 @@ int List_destroy(LinkedList* list);
 //              the client responsibility to allocate and initialize
 //				item.
 //  Returns: Pointer to the data appended on success else NULL.
-//  Note: If list is empty, the first, last and iterator node will 
+//  Note: If list is empty, the first, last and iterator node will
 //        point to the newly added node.
 /////////////////////////////////////////////////////////////////////////////////////////
 int List_append(LinkedList* list, void* data);
 
 /////////////////////////////////////////////////////////////////////////////////////////
-// Points the head node to the node next to the head node in the 
+// Points the head node to the node next to the head node in the
 // list, and destroys the current head node.
 //  Arg - list: The list to be beheaded.
 //  Returns: 1 if success, else 0.
-//  Note: If beheading removes the last node in the list, the head, 
+//  Note: If beheading removes the last node in the list, the head,
 //        tail and iterator nodes will be NULL. If the iterator node
 //        pointed to the old head, the iterator will point to the
 //        new head on return.
@@ -80,21 +78,21 @@ int List_behead(LinkedList* list);
 /////////////////////////////////////////////////////////////////////////////////////////
 //  List_prepend links new data to the start of a linked list
 //  Arg - LinkedList: The linked list to append.
-//  Arg - item: The data to be prepended to the start of the list. 
-//              It is the client responsibility to allocate and 
+//  Arg - item: The data to be prepended to the start of the list.
+//              It is the client responsibility to allocate and
 //				initialize item.
 //  Returns: Pointer to the data prepended on success else NULL.
-//  Note: If list is empty, the first, last and iterator node will 
+//  Note: If list is empty, the first, last and iterator node will
 //        point to the newly added node.
 /////////////////////////////////////////////////////////////////////////////////////////
 int List_prepend(LinkedList* list, void* data);
 
 /////////////////////////////////////////////////////////////////////////////////////////
-// Points the tail node to the node previous to the tail node in the 
+// Points the tail node to the node previous to the tail node in the
 // list and destroys the current tail node.
 //  Arg - list: The list to be chopped.
 //  Returns: 1 if success, else 0.
-//  Note: If chopping removes the last node in the list, the tail, 
+//  Note: If chopping removes the last node in the list, the tail,
 //        head and iterator nodes will be NULL. If the iterator node
 //        pointed to the old tail, the iterator will point to the
 //        new tail on return.
